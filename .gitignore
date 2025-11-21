@@ -1,0 +1,75 @@
+# Système / OS
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Éditeurs / IDE
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.user
+*.userprefs
+
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Environnements et variables d'environnement
+.env
+.env.local
+.env.*.local
+.local
+*.env
+
+# Build / distribution
+dist/
+build/
+out/
+coverage/
+.cache/
+
+# Logs / temporaires
+logs/
+*.log
+*.tmp
+tmp/
+temp/
+
+# Python (si présent)
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+venv/
+.env/
+*.egg-info/
+
+# Fichiers compilés / binaires
+*.exe
+*.dll
+*.so
+*.dylib
+*.o
+*.obj
+*.class
+
+# Swap / fichiers temporaires d'éditeur
+*~
+*.swp
+*.swo
+.#*
+
+# Clés / certificats
+*.pem
+*.key
+
+# Autres
+.idea/
+.vagrant/

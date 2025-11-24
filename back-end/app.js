@@ -1,13 +1,22 @@
 const express = require('express');
-const cors = require('cors');
-require('dotenv').config();
-
 const app = express();
 const port = process.env.PORT || 3000;
+const cors = require('cors');
+const routes = require('./routes/users');
+require('dotenv').config();
+
 
 // Middleware
 app.use(cors());
 app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+
+// Initialiser la base de données
+const db = require('./config/database');
+const { initUserTable } = require('./models/User.model.js');
+initUserTable(); //initialisation de la table au demarrage
+
+
 
 // Routes
 app.get('/', (req, res) => {
@@ -18,8 +27,8 @@ app.get('/health', (req, res) => {
   res.send("OK");
 });
 
-const users = require('./routes/users');
-app.use('/users', users);
+
+app.use('/users', routes);
 
 
 //start server

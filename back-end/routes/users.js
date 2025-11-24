@@ -1,15 +1,18 @@
 const express = require('express');
 const router = express.Router();
+const userController = require('../controllers/userController');
+const validation = require('../middleware/validation');
 
-// Sample user data 
-const users = [
-  { id: 1, name: 'Alice' },
-  { id: 2, name: 'Bob' },
-];
+router.post('/register', validation.validation, userController.register)
 
-// GET tous les utilisateurs
-router.get('/', (req, res) => {
-  res.json(users);
-});
+router.get('/all', userController.findAllUser)
+
+router.get('/user/email/:email', userController.findUserByEmail)
+
+router.get('/user/name/:userName', userController.findUserByName)
+
+
+router.delete('/user/name/:userName', userController.deleteUser)
+
 
 module.exports = router;

@@ -26,14 +26,23 @@ const initUserTable = () => {
 
 
 const createUser = (user, callback) => {
-    const { userName, prenom, email, password, pays } = user;
+    const {
+        userName,
+        prenom,
+        date_naissance,
+        email,
+        password,
+        pays,
+        conditions_generales_accepted,
+        newsletter_accepted
+    } = user;
     db.run(`INSERT INTO users (userName, prenom, date_naissance, email, password, pays, conditions_generales_accepted, newsletter_accepted) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
-        [userName, prenom, date_naissance, email, password, pays, condition_generales_accepted ? 1 : 0, newsletter_accepted ? 1 : 0],
+        [userName, prenom, date_naissance, email, password, pays, conditions_generales_accepted ? 1 : 0, newsletter_accepted ? 1 : 0],
         (err) => {
             if (err) {
                 return callback(err);
             } else {
-               return callback(null, {message: 'User created successfully'});
+                return callback(null, { message: 'User created successfully' });
             }
         });
 };
@@ -49,6 +58,16 @@ const findUserByEmail = (email, callback) => {
     });
 };
 
+const findAllUser = (callback) => {
+    db.all(`SELECT * FROM users`, (err, row) =>{
+        if(err){
+            console.error("Error finding all users", err);
+            return callback(err);
+        }
+        return callback(null, row);
+    });
+}
+
 
 const findUserByName = (userName, callback) => {
     db.get(`SELECT * FROM users WHERE userName = ?`, [userName], (err, row) => {
@@ -60,11 +79,23 @@ const findUserByName = (userName, callback) => {
     });
 };
 
+const deleteUser = (userName, callback) =>{
+    db.run(`DELETE FROM users WHERE userName = ?`, [userName], (err) => {
+        if (err) {
+            console.error("Error deleting user", err);
+            return callback(err);
+        }
+        return callback(null, { message: 'User deleted successfully' });
+    });
+}
+
 
 
 module.exports = {
-  initUserTable,
+    initUserTable,
     createUser,
     findUserByEmail,
-    findUserByName
+    findUserByName,
+    findAllUser,
+    deleteUser
 };

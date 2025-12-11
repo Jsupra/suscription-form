@@ -87,7 +87,7 @@ const deleteUser = (userName, callback) =>{
             console.error("Error deleting user", err);
             return callback(err);
         }
-        return callback(null, { message: 'User deleted successfully' });
+        return callback(err, this.changes, { message: 'User deleted successfully' });
     });
 }
 

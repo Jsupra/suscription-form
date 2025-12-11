@@ -33,3 +33,5 @@ tmp/
 temp/
 *.tmp
 
+# database
+data/

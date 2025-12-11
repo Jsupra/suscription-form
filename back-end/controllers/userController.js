@@ -103,10 +103,10 @@ exports.findUserByName = (req, res) => {
 
 exports.deleteUser = (req, res) => {
     const { userName } = req.params;
-    User.deleteUser(userName, (err, userFind, successMsg) => {
+    User.deleteUser(userName, (err, userFind) => {
         if (err) return res.status(500).json({ error: 'internal server error' });
-        if (!userFind || userFind === 0) return res.status(404).json({ error: 'user not found' });
-        return res.status(200).json({ message: 'user deleted successfully', userFind, successMsg });
+        if (!userFind) return res.status(404).json({ error: 'user not found' });
+        return res.status(200).json({ message: 'user deleted successfully', userFind});
     });
 };
 

@@ -82,12 +82,12 @@ const findUserByName = (userName, callback) => {
 };
 
 const deleteUser = (userName, callback) =>{
-    db.run(`DELETE FROM users WHERE userName = ?`, [userName], (err) => {
+    db.run(`DELETE FROM users WHERE userName = ?`, [userName], function(err) {
         if (err) {
             console.error("Error deleting user", err);
             return callback(err);
         }
-        return callback(err, this.changes, { message: 'User deleted successfully' });
+        return callback(null, this.changes);
     });
 }
 

@@ -34,7 +34,7 @@ exports.validation = (req, res, next) => {
     // Vérifier si le mot de passe contient au moins une majuscule, une minuscule, un chiffre et un caractère spécial
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
     if (!passwordRegex.test(password)) {
-        return res.status(400).json({ error: 'Mot de passe invalide' });
+        return res.status(400).json({ error: 'Mot de passe invalide, le mot de passe doit contenir au moins  une majuscule, une minuscule, un chiffre et un caractère spécial ' });
     }
 
     //verifier si condition utilisation sont accepte

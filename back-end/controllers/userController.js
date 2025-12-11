@@ -11,6 +11,10 @@
 const User = require('../models/User.model.js');
 const bcrypt = require('bcrypt');
 
+function lowerCase (text){
+   if(!text) return text;
+   return text.toLowerCase();
+}
 
 exports.register = (req, res) => {
 
@@ -25,8 +29,13 @@ exports.register = (req, res) => {
         newsletter_accepted
     } = req.body;
 
+    const emailClean = lowerCase(email);
+    const userNameClean = lowerCase(userName);
+    const prenomClean = lowerCase(prenom);
+    const paysClean = lowerCase(pays);
+
     // verification de l'email 
-    User.findUserByEmail(email, (err, existingUser) => {
+    User.findUserByEmail(emailClean, (err, existingUser) => {
         if (err) {
             return res.status(500).json({
                 error: 'internal server error'
@@ -34,28 +43,31 @@ exports.register = (req, res) => {
         }
         if (existingUser) {
             return res.status(400).json({
-                error: 'user already exists'
+                error: 'email already used'
             });
         }
 
         // verification de l'username
-        User.findUserByName(userName, (err, existingUser) => {
+        User.findUserByName(userNameClean, (err, existingUser) => {
             if (err) return res.status(500).json({ error: 'internal server error' });
             if (existingUser) return res.status(400).json({ error: 'user already exists' });
+            
+            
 
             bcrypt.hash(password, 10, (err, hashedPassword) => {
                 if (err) return res.status(500).json({ error: 'hashing error' });
 
                 const userData = {
-                    userName,
-                    email,
-                    prenom,
+                    userName: userNameClean,
+                    email: emailClean,
+                    prenom: prenomClean,
                     password: hashedPassword,
-                    pays,
+                    pays: paysClean,
                     date_naissance,
                     conditions_generales_accepted,
                     newsletter_accepted
                 }
+
 
                 User.createUser(userData, (err, result) => {
                     if (err) return res.status(500).json({ error: 'internal server error' });

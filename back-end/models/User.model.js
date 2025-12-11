@@ -1,5 +1,7 @@
 const db = require('../config/database');
 
+
+
 // Définir le modèle User
 const initUserTable = () => {
     db.run(`CREATE TABLE IF NOT EXISTS users (
@@ -26,7 +28,7 @@ const initUserTable = () => {
 
 
 const createUser = (user, callback) => {
-    const {
+    let {
         userName,
         prenom,
         date_naissance,
@@ -91,11 +93,12 @@ const deleteUser = (userName, callback) =>{
 
 
 
+
 module.exports = {
     initUserTable,
     createUser,
     findUserByEmail,
     findUserByName,
     findAllUser,
-    deleteUser
+    deleteUser,
 };

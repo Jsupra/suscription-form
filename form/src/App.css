@@ -1,0 +1,20 @@
+@import "tailwindcss";
+
+input, select {
+    border: 2px solid #ccc; 
+    border-radius: 0.5rem;
+    padding: 0.3rem 0.7rem;
+    width: 250px;
+}
+
+.form-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+}
+
+.form-row label {
+    min-width: 180px;
+    text-align: left;
+}

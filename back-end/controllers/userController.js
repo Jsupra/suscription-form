@@ -11,6 +11,9 @@
 const User = require('../models/User.model.js');
 const bcrypt = require('bcrypt');
 
+
+
+// fonction pour mettre en miniscule
 function lowerCase (text){
    if(!text) return text;
    return text.toLowerCase();

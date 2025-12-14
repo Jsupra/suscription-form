@@ -28,7 +28,7 @@ app.get('/health', (req, res) => {
 });
 
 
-app.use('/users', routes);
+app.use('/api/users', routes);
 
 
 //start server
